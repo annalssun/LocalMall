@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
     "react": "^16.0.0-beta.5",
-    "react-native": "^0.50.1"
+    "react-native": "^0.50.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "author": "",
   "license": "ISC"
