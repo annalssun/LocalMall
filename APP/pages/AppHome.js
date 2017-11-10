@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 
 import {
     View,
+    Text,
     StatusBar,
     BackAndroid
 } from 'react-native'

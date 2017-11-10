@@ -23,7 +23,7 @@ class Splash extends Component {
         const { navigate } = this.props.navigation;
         this.timer = setTimeout(() => {
             InteractionManager.runAfterInteractions(() => {
-                navigate('AppHome');
+                navigate('home');
             });
         }, 2000);
     }
