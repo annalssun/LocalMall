@@ -7,7 +7,8 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    Image
+    Image,
+    StyleSheet
 } from 'react-native';
 
 class Login extends Component {
@@ -21,7 +22,7 @@ class Login extends Component {
             <View style={{ backgroundColor: "#f5f5f5", flex: 1 }}>
                 <View style={styles.topbar_bg}>
                     <TouchableOpacity style={styles.topbar_left_item}
-                        onPress={}>
+                        >
                         <Image style={{ height: 20, width: 13 }}
                             source={require('../../imgs/ic_center_back.png')} />
                     </TouchableOpacity>
@@ -31,7 +32,7 @@ class Login extends Component {
                 </View>
                 <View>
                     <TouchableOpacity style={styles.topbar_right_item}
-                    onPress={}>
+                    >
                         <Text style={styles.topbar_right_tv}>注册</Text>
                         </TouchableOpacity>
                     </View>
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     topbar_bg: {
         height: 48,
         backgroundColor: 'black',
-        flex: 'row'
+        flexDirection: 'row'
     },
     topbar_left_item: {
         width: 48,
@@ -80,4 +81,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     }
 });
+
+export default Login;
 
