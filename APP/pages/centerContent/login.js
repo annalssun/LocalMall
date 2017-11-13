@@ -11,31 +11,66 @@ import {
     StyleSheet
 } from 'react-native';
 
+var username='';
+var password='';
+
 class Login extends Component {
     constructor(props) {
         super(props);
     }
 
+    /*****************************************************************************************/
+    static navigationOptions = ({ navigation }) => ({
+        // 这里面的属性和App.js的navigationOptions是一样的。
+        headerTitle: '登录',
+        headerStyle: {
+            backgroundColor: '#000'
+        },
+        headerLeft: (//导航栏左侧区域
+            <TouchableOpacity style={styles.topbar_left_item}
+                onPress={() => { navigation.goBack() }}>
+                <Image style={{ height: 20, width: 13 }}
+                    source={require('../../imgs/ic_center_back.png')} />
+            </TouchableOpacity>
+
+        ),
+        //导航栏的title的style
+        headerTitleStyle: {
+            color: 'white',
+            //居中显示
+            alignSelf: 'center',
+        },
+        headerRight: (//导航栏右侧区域
+            <TouchableOpacity style={styles.topbar_right_item}>
+                <Text style={styles.topbar_right_tv}>注册</Text>
+            </TouchableOpacity>
+        ),
+    });
+
+    /*****************************************************************************************/
 
     render() {
         return (
             <View style={{ backgroundColor: "#f5f5f5", flex: 1 }}>
-                <View style={styles.topbar_bg}>
-                    <TouchableOpacity style={styles.topbar_left_item}
-                        >
-                        <Image style={{ height: 20, width: 13 }}
-                            source={require('../../imgs/ic_center_back.png')} />
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.topbar_center_bg}>
-                    <Text style={styles.topbar_center_tv}>登录</Text>
-                </View>
-                <View>
-                    <TouchableOpacity style={styles.topbar_right_item}
-                    >
-                        <Text style={styles.topbar_right_tv}>注册</Text>
-                        </TouchableOpacity>
+                <View style={{ backgroundColor: 'white', marginTop: 13 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', height: 45 }}>
+                        <Image style={{ width: 17, height: 14 }}
+                            source={require('../../imgs/logre/ic_us_icon.png')} />
+                        <TextInput
+                        style={{height:40,textAlign:'left',textAlignVertical:'center',flex:1}}
+                        placeholder="手机/邮箱"
+                        placeholderTextColor="#aaa"
+                        underlineColorAndroid="transparent"
+                        numberOfLines={1}
+                        multiline={true}
+                        onFocus={true}
+                        ref={'username'}
+                        onChangeText={(text)=>{
+                            username=text
+                        }}
+                        />
                     </View>
+                </View>
             </View>
         );
     }
