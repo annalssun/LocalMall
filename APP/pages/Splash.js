@@ -3,6 +3,7 @@
 'use strict'
 
 import React, { Component } from 'react';
+import { NavigationActions } from 'react-navigation';
 
 import {
     InteractionManager,
@@ -16,14 +17,15 @@ var { height, width } = Dimensions.get('window');
 class Splash extends Component {
     constructor(props) {
         super(props);
+        this.gotoHome = this.gotoHome.bind(this);
     }
 
     componentDidMount() {
-        console.log(this.props.navigation)
         const { navigate } = this.props.navigation;
         this.timer = setTimeout(() => {
             InteractionManager.runAfterInteractions(() => {
-                navigate('home');
+                // navigate('home');
+                this.gotoHome();
             });
         }, 2000);
     }
@@ -40,6 +42,19 @@ class Splash extends Component {
                 />
             </View>
         );
+    }
+
+    gotoHome() {
+        const { dispatch } = this.props.navigation;
+        if (dispatch) {
+            dispatch(
+                NavigationActions.reset({
+                    index: 0,
+                    actions: [NavigationActions.navigate({ routeName: 'home' })],
+                })
+            );
+        }
+
     }
 
 }

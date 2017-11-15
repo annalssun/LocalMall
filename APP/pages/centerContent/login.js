@@ -2,6 +2,9 @@
 
 import React, { Component } from 'react';
 
+import { toastShort } from '../../utils/TostUtil';
+import  LoginShortLine  from '../../component/LoginShortLine'
+
 import {
     View,
     Text,
@@ -11,8 +14,8 @@ import {
     StyleSheet
 } from 'react-native';
 
-var username='';
-var password='';
+var username = '';
+var password = '';
 
 class Login extends Component {
     constructor(props) {
@@ -52,22 +55,42 @@ class Login extends Component {
     render() {
         return (
             <View style={{ backgroundColor: "#f5f5f5", flex: 1 }}>
-                <View style={{ backgroundColor: 'white', marginTop: 13 }}>
+                <View style={{ backgroundColor: 'white', marginTop: 13 ,marginLeft:10,marginRight:10}}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', height: 45 }}>
-                        <Image style={{ width: 17, height: 14 }}
+                        <Image style={{ width: 17, height: 14,marginLeft:8 }}
                             source={require('../../imgs/logre/ic_us_icon.png')} />
                         <TextInput
-                        style={{height:40,textAlign:'left',textAlignVertical:'center',flex:1}}
-                        placeholder="手机/邮箱"
-                        placeholderTextColor="#aaa"
-                        underlineColorAndroid="transparent"
-                        numberOfLines={1}
-                        multiline={true}
-                        onFocus={true}
-                        ref={'username'}
-                        onChangeText={(text)=>{
-                            username=text
-                        }}
+                            style={{ height: 40, textAlign: 'left', textAlignVertical: 'center', flex: 1 }}
+                            placeholder="手机/邮箱"
+                            placeholderTextColor="#aaa"
+                            underlineColorAndroid="transparent"
+                            numberOfLines={1}
+                            multiline={true}
+                            autoFocus={true}
+                            ref={'username'}
+                            onChangeText={(text) => {
+                                username = text
+                                toastShort(username);
+                            }}
+                        />
+                    </View>
+                 <LoginShortLine />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', height: 45 }}>
+                        <Image style={{ width: 20, height: 18,marginLeft:8 }}
+                            source={require('../../imgs/logre/ic_pwd_icon.png')} />
+                        <TextInput
+                            style={{ height: 40, textAlign: 'left', textAlignVertical: 'center', flex: 1 }}
+                            placeholder="密码"
+                            placeholderTextColor="#aaa"
+                            underlineColorAndroid="transparent"
+                            numberOfLines={1}
+                            multiline={true}
+                            ref={'password'}
+                            secureTextEntry={true}
+                            onChangeText={(text) => {
+                                password = text
+                                toastShort(password);
+                            }}
                         />
                     </View>
                 </View>

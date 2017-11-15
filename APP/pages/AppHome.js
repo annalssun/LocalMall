@@ -2,21 +2,26 @@
 'use strict'
 
 import React, { Component } from 'react';
-
+import { toastShort } from '../utils/TostUtil';
+import { connect } from 'react-redux';
 import {
     View,
     Text,
     StatusBar,
     BackAndroid,
     TouchableOpacity,
-    Button
+    Button,
+    Platform,
+    BackHandler
 } from 'react-native'
 
 
 class AppHome extends Component {
     constructor(props) {
         super(props);
+
     }
+
 
     /*****************************************************************************************/
     static navigationOptions = ({ navigation }) => ({
@@ -31,8 +36,8 @@ class AppHome extends Component {
             //居中显示
             alignSelf: 'center',
         },
-        headerBackTitle:null,
-        headerLeft:null,
+        headerBackTitle: null,
+        headerLeft: null,
     });
     /*****************************************************************************************/
 
@@ -40,18 +45,27 @@ class AppHome extends Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <View style={{flex:1,justifyContent:'center'}}>
-                <TouchableOpacity style={{ backgroundColor: 'black',alignContent:'center', alignSelf: 'center' }}
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+                <TouchableOpacity style={{ backgroundColor: 'black', alignContent: 'center', alignSelf: 'center' }}
                     onPress={() => { navigate('Login') }}>
-                    <Text style={{fontSize:15,color:'white'}}>点我到登录</Text>
+                    <Text style={{ fontSize: 15, color: 'white' }}>点我到登录</Text>
                 </TouchableOpacity>
-                </View>
-        
+            </View>
+
         );
     }
 
 
-
+   
 }
 
-export default AppHome;
+
+function mapStateToProps(state) {
+    const { nav } = state;
+    return {
+        nav
+    }
+}
+
+
+export default connect(mapStateToProps)(AppHome);
