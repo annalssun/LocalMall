@@ -17,15 +17,23 @@ class App extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <StatusBar
-                    barStyle='light-content'
-                    backgroundColor='transparent'
-                    style={{ height: 30 }}
-                />
+                 <StatusBar
+                    animated={true}
+                    hidden={false}
+                    backgroundColor={'#00000000'}
+                    translucent={true}
+                    barStyle={'default'}
+                    showHideTransition={'fade'}
+                    />
                 <StackNavigatorComponent />
             </View>
         );
     }
 }
-
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor:'#FFFFFFFF'
+    },
+});
 export default App;

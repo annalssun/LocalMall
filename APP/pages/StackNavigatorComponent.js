@@ -14,7 +14,10 @@ import { NavigationActions } from 'react-navigation';
 
 import {
     Platform,
-    BackHandler
+    BackHandler,
+    BackAndroid,
+    StatusBar,
+    View
 } from 'react-native';
 
 class NavigatorComponent extends Component {
@@ -26,47 +29,39 @@ class NavigatorComponent extends Component {
 
     render() {
         return (
-            <Navigator
-                navigation={addNavigationHelpers({
+                <Navigator
+                    navigation={addNavigationHelpers({
                     dispatch: this.props.dispatch,
                     state: this.props.nav,
-                })}
-            />
+                    })}
+                />
         );
 
     }
 
-
-    componentWillMount() {
-        if (Platform.OS === 'android') {
-            BackHandler.addEventListener('hardwareBackPress', this.goBackAndroid);
-        }
-    }
-    componentWillUnmount() {
-
-        if (Platform.OS === 'android') {
-            BackHandler.addEventListener('hardwareBackPress', this.goBackAndroid);
-
-        }
-    }
-
+    // render(){
+    //     return(
+    //         <Navigator/>
+    //     )
+    // }
 
     goBackAndroid() {
         const { routes } = this.props.nav;
         const {nav} = this.props;
-        console.log(routes.length);
+        const {dispatch} = this.props;
         console.log(nav.index);
         if (nav.index===0) {
             if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
                 //最近2秒内按过back键，可以退出应用。
-                BackHandler.exitApp();
+                BackAndroid.exitApp();
+                
                 return false;
             }
             this.lastBackPressed = Date.now();
             toastShort("再按一次退出应用");
             return true;
         }
-        this.goback();
+        dispatch(NavigationActions.back())
         return true;
     }
 
@@ -76,6 +71,18 @@ class NavigatorComponent extends Component {
             dispatch(
                 NavigationActions.back({})
             );
+        }
+    }
+
+    componentWillMount() {
+        if (Platform.OS === 'android') {
+            BackHandler.addEventListener('hardwareBackPress', this.goBackAndroid);
+        }
+    }
+    componentWillUnmount() {
+        if (Platform.OS === 'android') {
+            BackHandler.addEventListener('hardwareBackPress', this.goBackAndroid);
+    
         }
     }
 
@@ -100,6 +107,9 @@ const StackNavigatorConfigs = {
 };
 
 export const Navigator = StackNavigator(RouteConfigs, StackNavigatorConfigs);
+
+
+
 
 
 function mapStateToProps(state,ownProps) {      

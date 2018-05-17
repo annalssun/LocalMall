@@ -10,7 +10,8 @@ import {
     View,
     Image,
     StyleSheet,
-    Dimensions
+    Dimensions,
+    StatusBar
 } from 'react-native'
 
 var { height, width } = Dimensions.get('window');
@@ -36,6 +37,12 @@ class Splash extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
+                <StatusBar
+                    hidden={false} //是否隐藏状态栏。
+                    animated={true} //是否需要动画效果
+                    translucent={true} //android平台，是否有半透明效果,如果为true,状态栏会浮在下面的布局上面，
+                    barStyle={'default'} //可以取值 'default', 'light-content', 'dark-content'它的默认是default,
+                />
                 <Image
                     style={{ flex: 1, height: height, width: width }}
                     source={require('../imgs/ic_welcome.jpg')}

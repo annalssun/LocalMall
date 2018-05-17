@@ -3,7 +3,10 @@
 import React, { Component } from 'react';
 
 import { toastShort } from '../../utils/TostUtil';
-import  LoginShortLine  from '../../component/LoginShortLine'
+import LoginShortLine from '../../component/LoginShortLine'
+
+import { connect } from 'react-redux';
+
 
 import {
     View,
@@ -11,15 +14,19 @@ import {
     TextInput,
     TouchableOpacity,
     Image,
-    StyleSheet
+    StyleSheet,
+    Dimensions
 } from 'react-native';
 
 var username = '';
 var password = '';
 
+var { width, height } = Dimensions.get('window');
+
 class Login extends Component {
     constructor(props) {
         super(props);
+        this.buttonRegistOrLoginAction= this.buttonRegistOrLoginAction.bind(this);
     }
 
     /*****************************************************************************************/
@@ -27,7 +34,7 @@ class Login extends Component {
         // 这里面的属性和App.js的navigationOptions是一样的。
         headerTitle: '登录',
         headerStyle: {
-            backgroundColor: '#000'
+            backgroundColor: '#ffff'
         },
         headerLeft: (//导航栏左侧区域
             <TouchableOpacity style={styles.topbar_left_item}
@@ -55,9 +62,9 @@ class Login extends Component {
     render() {
         return (
             <View style={{ backgroundColor: "#f5f5f5", flex: 1 }}>
-                <View style={{ backgroundColor: 'white', marginTop: 13 ,marginLeft:10,marginRight:10}}>
+                <View style={{ backgroundColor: 'white', marginTop: 13, marginLeft: 10, marginRight: 10 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', height: 45 }}>
-                        <Image style={{ width: 17, height: 14,marginLeft:8 }}
+                        <Image style={{ width: 17, height: 14, marginLeft: 8 }}
                             source={require('../../imgs/logre/ic_us_icon.png')} />
                         <TextInput
                             style={{ height: 40, textAlign: 'left', textAlignVertical: 'center', flex: 1 }}
@@ -74,9 +81,9 @@ class Login extends Component {
                             }}
                         />
                     </View>
-                 <LoginShortLine />
+                    <LoginShortLine />
                     <View style={{ flexDirection: 'row', alignItems: 'center', height: 45 }}>
-                        <Image style={{ width: 20, height: 18,marginLeft:8 }}
+                        <Image style={{ width: 20, height: 18, marginLeft: 8 }}
                             source={require('../../imgs/logre/ic_pwd_icon.png')} />
                         <TextInput
                             style={{ height: 40, textAlign: 'left', textAlignVertical: 'center', flex: 1 }}
@@ -94,10 +101,24 @@ class Login extends Component {
                         />
                     </View>
                 </View>
+
+                <TouchableOpacity style={{ justifyContent: 'center', marginTop: 13, alignItems: 'center' }}>
+                    {/* <Image source={require('../../imgs/logre/ic_login_btn.png')}
+                        style={{ width: 300, height: 40, justifyContent: 'center', alignItems: 'center' }}> */}
+                        <Text style={{ color: 'white' }}>登录</Text>
+                    {/* </Image> */}
+                </TouchableOpacity>
             </View>
         );
     }
+
+
+    buttonRegistOrLoginAction(){
+
+    }
 }
+
+
 
 
 const styles = StyleSheet.create({
@@ -140,5 +161,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Login;
+
+function mapStateToProps(state,ownProps) {      
+    const { login } = state;
+    return {
+        login
+    }
+}
+
+
+export default connect(mapStateToProps)(Login);
 

@@ -4,6 +4,8 @@
 import React, { Component } from 'react';
 import { toastShort } from '../utils/TostUtil';
 import { connect } from 'react-redux';
+
+import { CommonStatusBar } from '../component/CommonStatusBar'
 import {
     View,
     Text,
@@ -12,7 +14,7 @@ import {
     TouchableOpacity,
     Button,
     Platform,
-    BackHandler
+    BackHandler,
 } from 'react-native'
 
 
@@ -44,10 +46,17 @@ class AppHome extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
+        const {dispatch} = this.props;
         return (
-            <View style={{ flex: 1, justifyContent: 'center' }}>
+            <View style={{ flex: 1, justifyContent: 'center',backgroundColor:'#ffff' }}>
+                {/* <StatusBar
+                        hidden={false} //是否隐藏状态栏。
+                        animated={true} //是否需要动画效果
+                        translucent={true} //android平台，是否有半透明效果,如果为true,状态栏会浮在下面的布局上面，
+                        barStyle={'default'} //可以取值 'default', 'light-content', 'dark-content'它的默认是default,
+                        /> */}
                 <TouchableOpacity style={{ backgroundColor: 'black', alignContent: 'center', alignSelf: 'center' }}
-                    onPress={() => { navigate('Login') }}>
+                    onPress={() => {dispatch({type:'Login'})}}>
                     <Text style={{ fontSize: 15, color: 'white' }}>点我到登录</Text>
                 </TouchableOpacity>
             </View>
