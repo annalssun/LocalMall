@@ -27,7 +27,6 @@ class NetComponent extends Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: params
             });
             let responseJson = await response.json();
             callback(responseJson);

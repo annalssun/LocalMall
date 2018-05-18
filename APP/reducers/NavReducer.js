@@ -20,6 +20,12 @@ export default function nav(state, action) {
                 ,state
             );
             break;
+        case 'NewsPage':
+            nextState = Navigator.router.getStateForAction(
+                NavigationActions.navigate({routeName:'NewsPage'})
+                ,state
+            );
+            break;
         default:
             nextState = Navigator.router.getStateForAction(action, state);
             break;

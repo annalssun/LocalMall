@@ -10,6 +10,8 @@ import Splash from './Splash';
 import Login from './centerContent/login';
 import { toastShort } from '../utils/TostUtil';
 
+import NewsPage, {} from './centerContent/News'
+
 import { NavigationActions } from 'react-navigation';
 
 import {
@@ -99,6 +101,7 @@ const RouteConfigs = {
         }
     },
     Login: { screen: Login },
+    NewsPage: {screen: NewsPage},
 }
 
 //初始页

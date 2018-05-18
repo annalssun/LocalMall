@@ -2,9 +2,11 @@
 
 import React, { Component } from 'react';
 
-import {GET_TEST_DATA_BASE} from './Request';
+
 import NetComponent, { } from './NetComponent';
 
+
+import { GET_TEST_DATA_BASE } from './Request';
 
 class TestDataRequest extends Component{
 
@@ -15,7 +17,11 @@ class TestDataRequest extends Component{
          * @param {*} callback  回调函数
          */
     static async getData(page,type,callback) {
-        requestUrl=GET_TEST_DATA_BASE+'type='+type+'&page='+page;
+        let requestUrl=GET_TEST_DATA_BASE+'type='+type+'&page='+page;
+        console.log("**************************************************")
+        console.log(requestUrl)
         NetComponent.get(requestUrl,"",callback);
     }
 }
+
+export default TestDataRequest;

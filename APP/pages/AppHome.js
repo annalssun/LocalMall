@@ -49,12 +49,10 @@ class AppHome extends Component {
         const {dispatch} = this.props;
         return (
             <View style={{ flex: 1, justifyContent: 'center',backgroundColor:'#ffff' }}>
-                {/* <StatusBar
-                        hidden={false} //是否隐藏状态栏。
-                        animated={true} //是否需要动画效果
-                        translucent={true} //android平台，是否有半透明效果,如果为true,状态栏会浮在下面的布局上面，
-                        barStyle={'default'} //可以取值 'default', 'light-content', 'dark-content'它的默认是default,
-                        /> */}
+                <TouchableOpacity style={{ backgroundColor: 'black', alignContent: 'center', alignSelf: 'center' ,marginBottom:20}}
+                    onPress={() => {dispatch({type:'NewsPage'})}}>
+                    <Text style={{ fontSize: 15, color: 'white' }}>点我到新闻显示页面</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={{ backgroundColor: 'black', alignContent: 'center', alignSelf: 'center' }}
                     onPress={() => {dispatch({type:'Login'})}}>
                     <Text style={{ fontSize: 15, color: 'white' }}>点我到登录</Text>
