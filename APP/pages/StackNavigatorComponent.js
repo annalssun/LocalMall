@@ -3,7 +3,9 @@
 'use strict'
 
 import React, { Component } from 'react';
-import { StackNavigator, addNavigationHelpers } from 'react-navigation';
+import {
+    createStackNavigator,  
+} from 'react-navigation'
 import { connect } from 'react-redux';
 import AppHome from './AppHome';
 import Splash from './Splash';
@@ -12,7 +14,9 @@ import { toastShort } from '../utils/TostUtil';
 
 import NewsPage, {} from './centerContent/News'
 
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions,addNavigationHelpers } from 'react-navigation';
+
+import {addListener} from '../utils/MyNaviRedux'
 
 import {
     Platform,
@@ -21,6 +25,26 @@ import {
     StatusBar,
     View
 } from 'react-native';
+
+// 路由表
+const RouteConfigs = {
+    home: { screen: AppHome },
+    Splash: {
+        screen: Splash,
+        navigationOptions: {
+            header: null,
+        }
+    },
+    Login: { screen: Login },
+    NewsPage: {screen: NewsPage},
+}
+
+//初始页
+const StackNavigatorConfigs = {
+    initialRouteName: 'Splash',
+};
+
+export const Navigator = createStackNavigator(RouteConfigs, StackNavigatorConfigs);
 
 class NavigatorComponent extends Component {
     constructor(props) {
@@ -32,21 +56,15 @@ class NavigatorComponent extends Component {
     render() {
         return (
                 <Navigator
-                    navigation={addNavigationHelpers({
-                    dispatch: this.props.dispatch,
-                    state: this.props.nav,
-                    })}
+                    navigation={{
+                        dispatch: this.props.dispatch,
+                        state: this.props.nav,
+                        addListener,
+                    }}         
                 />
         );
 
     }
-
-    // render(){
-    //     return(
-    //         <Navigator/>
-    //     )
-    // }
-
     goBackAndroid() {
         const { routes } = this.props.nav;
         const {nav} = this.props;
@@ -75,7 +93,6 @@ class NavigatorComponent extends Component {
             );
         }
     }
-
     componentWillMount() {
         if (Platform.OS === 'android') {
             BackHandler.addEventListener('hardwareBackPress', this.goBackAndroid);
@@ -90,30 +107,6 @@ class NavigatorComponent extends Component {
 
 
 }
-
-// 路由表
-const RouteConfigs = {
-    home: { screen: AppHome },
-    Splash: {
-        screen: Splash,
-        navigationOptions: {
-            header: null,
-        }
-    },
-    Login: { screen: Login },
-    NewsPage: {screen: NewsPage},
-}
-
-//初始页
-const StackNavigatorConfigs = {
-    initialRouteName: 'Splash',
-};
-
-export const Navigator = StackNavigator(RouteConfigs, StackNavigatorConfigs);
-
-
-
-
 
 function mapStateToProps(state,ownProps) {      
     const { nav } = state;

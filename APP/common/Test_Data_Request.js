@@ -18,7 +18,6 @@ class TestDataRequest extends Component{
          */
     static async getData(page,type,callback) {
         let requestUrl=GET_TEST_DATA_BASE+'type='+type+'&page='+page;
-        console.log("**************************************************")
         console.log(requestUrl)
         NetComponent.get(requestUrl,"",callback);
     }

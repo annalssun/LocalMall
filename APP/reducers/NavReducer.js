@@ -1,14 +1,14 @@
 
-import { Navigator } from '../pages/StackNavigatorComponent';
-import {NavigationActions} from "react-navigation";
+import {NavigationActions,StackNavigator,StackActions} from "react-navigation";
 
+import {Navigator} from '../pages/StackNavigatorComponent';
 
-export default function nav(state, action) {
+const initialState = Navigator.router.getStateForAction(Navigator.router.getActionForPathAndParams('home'));
 
+export default function NavReducer(state, action) {
     let nextState;
     switch (action.type) {
         case 'Login':
-            console.log("****************Login*****************");
             nextState = Navigator.router.getStateForAction(
                 NavigationActions.navigate({routeName:'Login'}),
                 state

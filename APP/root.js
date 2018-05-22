@@ -6,6 +6,9 @@ import configureStore from './store/configure-store'
 
 import App from './App'
 
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+
 const store = configureStore();
 
 class rootApp extends Component {

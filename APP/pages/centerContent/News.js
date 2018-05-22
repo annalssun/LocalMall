@@ -16,9 +16,9 @@ import {
 class NewsPage extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            data: new ListView.DataSource({rowHasChanged: (r1,r2) => r1!==r2 }).cloneWithRows(this.props.data),
-          };
+        // this.state = {
+        //     data: new ListView.DataSource({rowHasChanged: (r1,r2) => r1!==r2 }).cloneWithRows(this.props.data),
+        //   };
 
         this._renderRow = this._renderRow.bind(this);
     }
@@ -42,8 +42,7 @@ class NewsPage extends Component{
     /*****************************************************************************************/
 
     componentWillMount(){
-        const {dispatch} = this.props;
-        dispatch(LoadNewsDataAction(1,1));
+        this.props.dispatch(LoadNewsDataAction(1,1));
         // TestDataRequest.getData(1,1,(jsonData)=>{
         //     this.setState({
         //         data: new ListView.DataSource({rowHasChanged: (r1,r2) => r1!==r2 }).cloneWithRows(jsonData.data),
@@ -52,17 +51,14 @@ class NewsPage extends Component{
     }
 
     render(){
-        console.log("***********************************************2")
-      if (!this.props.data && this.props.status){
+      if (!this.props.data){
           return(
               <Text>Loading......</Text>
           );
       }else{
           return(
             <ListView
-                // dataSource = {this.props.data}
-                dataSource = {this.props.data}
-                // renderRow ={(rowData)=>this.rowData(rowData)}
+                dataSource = {new ListView.DataSource({rowHasChanged: (r1,r2) => r1!==r2 }).cloneWithRows(this.props.data.data)}
                 renderRow={(rowData) => this._renderRow(rowData)}
             >
             </ListView>
@@ -72,14 +68,25 @@ class NewsPage extends Component{
 
 
     _renderRow(rowData){
-        return(
-            <View style={styles.lvRow}>
-                <Image style={styles.img} source={{uri:rowData.profile_image}}></Image>
-                <View style={styles.textView}>
-                    <Text style={styles.textTitle}>{rowData.text}</Text>
+        if(rowData.profile_image){
+            return(
+                <View style={styles.lvRow}>
+                    <Image style={styles.img} source={{uri:rowData.profile_image}}></Image>
+                    <View style={styles.textView}>
+                        <Text style={styles.textTitle}>{rowData.text}</Text>
+                    </View>
                 </View>
-            </View>
-        );
+            );
+        }else{
+            return(
+                <View style={styles.lvRow}>
+                    <View style={styles.textView}>
+                        <Text style={styles.textTitle}></Text>
+                    </View>
+                </View>
+            );
+        }
+      
     }
 }
 
@@ -118,13 +125,10 @@ const styles = StyleSheet.create({
 
   function mapStateToProps(state) {
     const { nav } = state;
-    const {data} =state;
-    const {loading} = state;
-    console.log("***********************************************1")
     return {
         nav,
         data:state.GetNewsData.data,
-        status:state.GetNewsData.loading,
+        status:state.GetNewsData.loading
         
     }
 }

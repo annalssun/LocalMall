@@ -3,7 +3,7 @@
 'use strict'
 
 import React, { Component } from 'react';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions,StackActions } from 'react-navigation';
 
 import {
     InteractionManager,
@@ -55,7 +55,7 @@ class Splash extends Component {
         const { dispatch } = this.props.navigation;
         if (dispatch) {
             dispatch(
-                NavigationActions.reset({
+                StackActions.reset({
                     index: 0,
                     actions: [NavigationActions.navigate({ routeName: 'home' })],
                 })

@@ -16,7 +16,7 @@ class App extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1}}>
                  <StatusBar
                     animated={true}
                     hidden={false}
